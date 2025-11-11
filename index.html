@@ -1,0 +1,338 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Toward a Light-Based Unification of Physics</title>
+  <meta name="description" content="A first principles framework proposing light (c) as the primitive that generates spacetime, fields, matter, and dynamics." />
+  <meta name="theme-color" content="#0b0f14" />
+  <meta property="og:title" content="Toward a Light-Based Unification of Physics" />
+  <meta property="og:description" content="Draft preprint and living document." />
+  <meta property="og:type" content="article" />
+  <meta property="og:image" content="https://dummyimage.com/1200x630/111/fff&text=Light-based+Universe" />
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>💡</text></svg>">
+
+  <!-- MathJax: LaTeX in the browser -->
+  <script>
+    window.MathJax = {
+      tex: { inlineMath: [['$', '$'], ['\\(', '\\)']], displayMath: [['$$','$$']] },
+      svg: { fontCache: 'global' }
+    };
+  </script>
+  <script defer src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js"></script>
+
+  <style>
+    :root{
+      --bg:#0b0f14; --panel:#0f1620; --ink:#e6edf3; --muted:#9db1c2;
+      --acc:#6fd3ff; --rule:#1a2330; --link:#8bd5ff;
+      --code-bg:#0b1118; --kbd:#111a24;
+      --max: 880px; --serif: ui-serif, Georgia, Cambria, "Times New Roman", Times, serif;
+      --sans: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Inter, "Helvetica Neue", Arial, "Noto Sans", "Liberation Sans", sans-serif;
+      --mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", monospace;
+    }
+    *{box-sizing:border-box}
+    html{scroll-behavior:smooth}
+    body{
+      margin:0; background:var(--bg); color:var(--ink); font-family:var(--sans);
+      line-height:1.6; -webkit-font-smoothing:antialiased; text-rendering:optimizeLegibility;
+    }
+    a{color:var(--link); text-decoration:none} a:hover{text-decoration:underline}
+    header{
+      position:sticky; top:0; z-index:10; backdrop-filter:saturate(150%) blur(8px);
+      background:color-mix(in oklab, var(--bg) 80%, #000 20%);
+      border-bottom:1px solid var(--rule);
+    }
+    .wrap{max-width:var(--max); margin:0 auto; padding:12px 20px}
+    .brand{display:flex; gap:10px; align-items:center; font-weight:700}
+    .brand .dot{width:10px;height:10px;border-radius:50%;background:var(--acc);box-shadow:0 0 18px var(--acc)}
+    nav a{margin-right:16px;font-size:14px}
+    .toc{
+      background:var(--panel); border:1px solid var(--rule); border-radius:14px;
+      padding:16px; margin:18px 0;
+    }
+    main{max-width:var(--max); margin:0 auto; padding:28px 20px}
+    h1,h2,h3{line-height:1.25}
+    h1{font-size:clamp(28px, 4vw, 40px); margin:16px 0 6px}
+    h2{font-size:clamp(22px, 3vw, 28px); margin:28px 0 6px; scroll-margin-top:90px}
+    h3{font-size:clamp(18px, 2.2vw, 22px); margin:20px 0 6px; scroll-margin-top:90px}
+    p.lead{font-size:18px; color:var(--muted)}
+    .meta{color:var(--muted); font-size:14px}
+    hr{border:none; border-top:1px solid var(--rule); margin:24px 0}
+    .panel{background:var(--panel); border:1px solid var(--rule); border-radius:14px; padding:18px}
+    kbd{font-family:var(--mono); background:var(--kbd); border:1px solid var(--rule); padding:2px 6px; border-radius:6px}
+    code, pre{font-family:var(--mono); background:var(--code-bg); border:1px solid var(--rule)}
+    code{padding:2px 6px; border-radius:6px}
+    pre{padding:14px; border-radius:12px; overflow:auto}
+    figure{margin:20px 0; padding:14px; border:1px dashed var(--rule); border-radius:12px}
+    figcaption{color:var(--muted); font-size:14px; margin-top:8px}
+    .buttons{display:flex; gap:10px; flex-wrap:wrap; margin:14px 0 0}
+    .btn{
+      background:linear-gradient(180deg, #101a25, #0c141d);
+      border:1px solid var(--rule); color:var(--ink); padding:10px 14px; border-radius:12px;
+      display:inline-flex; align-items:center; gap:8px; cursor:pointer; text-decoration:none;
+      box-shadow: 0 4px 20px rgba(0,0,0,.25);
+    }
+    .btn:hover{border-color:#223046}
+    .cite{color:var(--muted); font-size:14px}
+    .footnote{font-size:14px;color:var(--muted)}
+    .right{float:right}
+    .small{font-size:13px}
+    .muted{color:var(--muted)}
+    .grid{display:grid; gap:14px}
+    @media (min-width:900px){ .grid.cols-2{grid-template-columns:1fr 1fr} }
+    /* Print (PDF export) */
+    @media print{
+      header, .buttons, .toc{display:none !important}
+      body{background:#fff; color:#000}
+      main{max-width:100%; padding:0}
+      a{color:#000; text-decoration:underline}
+      figure{border-color:#ccc}
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="wrap" style="display:flex;align-items:center;justify-content:space-between;">
+      <div class="brand"><span class="dot" aria-hidden="true"></span><span>Light-Based Universe</span></div>
+      <nav class="small">
+        <a href="#abstract">Abstract</a>
+        <a href="#axioms">Axioms</a>
+        <a href="#formalism">Formalism</a>
+        <a href="#predictions">Predictions</a>
+        <a href="#simulations">Simulations</a>
+        <a href="#references">References</a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <h1>Toward a Light-Based Unification of Physics</h1>
+    <p class="meta">
+      Thomas M. Stephens (tmsteph) · 3dvr.tech · <a href="mailto:tmsteph1290@gmail.com">tmsteph1290@gmail.com</a><br>
+      Draft v0.1 (living document) · License: MIT · <span id="build-date"></span>
+    </p>
+
+    <div class="buttons">
+      <a class="btn" href="#" onclick="window.print()"><span>🖨️</span> Export PDF</a>
+      <a class="btn" id="edit-link" href="#" target="_blank" rel="noopener">✏️ Edit on GitHub</a>
+      <a class="btn" href="#toc">☰ Table of Contents</a>
+    </div>
+
+    <section id="abstract" class="panel" aria-labelledby="abstract-h2">
+      <h2 id="abstract-h2">Abstract</h2>
+      <p class="lead">
+        We propose a program in which <em>light (and the invariant speed <code>c</code>)</em> is the primitive from which
+        spacetime, fields, and matter emerge. In this view, space is a relational structure induced by light-like
+        connectivity; mass corresponds to confined or resonant light; and gravity arises as geometry that constrains
+        null propagation. We outline axioms, a minimal formalism, falsifiable predictions, and simulation plans.
+      </p>
+      <p>
+        The approach aims to (i) recover special and general relativity from null-cone structure,
+        (ii) reproduce the Standard Model particle spectrum as stable resonances of constrained radiation,
+        and (iii) explain “dark” phenomena via non-radiative light dynamics rather than new matter species.
+      </p>
+      <p class="footnote">This is a preprint-style “living paper.” Citations and figures are numbered automatically.</p>
+    </section>
+
+    <section id="toc" class="toc" aria-labelledby="toc-h2">
+      <h2 id="toc-h2">Table of Contents</h2>
+      <ol id="toc-list"></ol>
+    </section>
+
+    <section id="axioms" aria-labelledby="axioms-h2">
+      <h2 id="axioms-h2">Axioms</h2>
+      <ol>
+        <li><strong>Light primacy.</strong> The invariant causal speed <code>c</code> defines structure; “space” and “time” are emergent summaries of light-like relations.</li>
+        <li><strong>Energy as configuration.</strong> Localized matter is confined or standing radiation; $$E=mc^2$$ is identity, not conversion.</li>
+        <li><strong>Geometry from propagation.</strong> Curvature encodes constraints on null geodesics; gravity is the kinematics of light-path connectivity.</li>
+        <li><strong>Fields as interaction rules.</strong> Gauge fields regulate interference and confinement of radiation; symmetries are propagation invariants.</li>
+        <li><strong>Information realism.</strong> Physical events are informational interactions bounded by <code>c</code> (no superluminal signaling).</li>
+      </ol>
+    </section>
+
+    <section id="formalism" aria-labelledby="formalism-h2">
+      <h2 id="formalism-h2">Minimal Formalism (v0.1)</h2>
+      <h3>1) Null-network substrate</h3>
+      <p>
+        Begin with an event set \\(\\mathcal{E}\\) and a symmetric relation \\(N \\subset \\mathcal{E}\\times\\mathcal{E}\\)
+        marking potential light-like connectivity. A Lorentzian metric \\(g\\) is recovered as the continuous limit of
+        constraints on null paths. Discrete dynamics iterate local update rules that preserve a causal partial order.
+      </p>
+      <pre><code>// Sketch: local step
+for (event of E) {
+  // interference + gauge update
+  event.phase = f(neighbors.phases, neighbors.links);
+  // confinement condition (resonance threshold)
+  if (Q(event) &gt;= Q*) event.tag = "mass-like";
+}</code></pre>
+
+      <h3>2) Mass as confinement</h3>
+      <p>
+        Define a confinement functional \\(\\mathcal{C}[\\psi]\\) over field configuration \\(\\psi\\). A mode is “mass-like”
+        if \\(\\partial_t \\mathcal{C}=0\\) under null-propagation—i.e., a stable resonance. The inertial mass satisfies
+        $$ m \\equiv \\frac{1}{c^2}\\int \\varepsilon(\\psi)\\, dV $$
+        with \\(\\varepsilon\\) energy density concentrated by confinement.
+      </p>
+
+      <h3>3) Gravity from null-cone deformation</h3>
+      <p>
+        Curvature is encoded by systematic deviations of geodesic congruences for null rays:
+        $$ \\delta\\theta = \\mathcal{F}[T_{\\mu\\nu}] $$
+        where \\(\\theta\\) is expansion and \\(\\mathcal{F}\\) maps energy-momentum to focusing (cf. Raychaudhuri-type).
+      </p>
+
+      <figure id="fig-null">
+        <svg viewBox="0 0 560 180" width="100%" role="img" aria-labelledby="fig-null-title">
+          <title id="fig-null-title">Schematic: null-cone deformation under energy density</title>
+          <defs><marker id="arrow" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto">
+            <polygon points="0 0, 6 3, 0 6" fill="#8bd5ff"/></marker></defs>
+          <rect x="0" y="0" width="560" height="180" fill="none" stroke="#1a2330"/>
+          <line x1="50" y1="160" x2="510" y2="20" stroke="#8bd5ff" stroke-width="2" marker-end="url(#arrow)"/>
+          <ellipse cx="280" cy="90" rx="80" ry="40" fill="none" stroke="#6fd3ff"/>
+          <text x="300" y="90" fill="#9db1c2" font-size="12">energy density → focusing</text>
+        </svg>
+        <figcaption>Figure <span class="fig-num"></span>. Null-cone deformation schematic.</figcaption>
+      </figure>
+    </section>
+
+    <section id="predictions" aria-labelledby="predictions-h2">
+      <h2 id="predictions-h2">Falsifiable Predictions (initial set)</h2>
+      <ol>
+        <li><strong>Resonant lensing signatures.</strong> Gravitational lensing residuals should include weak wavelength-linked modulations from light-confinement microstructure.</li>
+        <li><strong>Quantized horizon micro-areas.</strong> Near-horizon observables exhibit step-like features consistent with null-network discretization scales.</li>
+        <li><strong>Dark matter as non-radiative circulation.</strong> Galaxy rotation curves predictable from trapped, phase-coherent radiation fields without new particles.</li>
+        <li><strong>Neutrino effective mass.</strong> A small mass emerges from near-free modes with weak confinement; predicts specific baseline-energy deviations.</li>
+      </ol>
+      <p class="cite small">
+        Status: placeholders for derivations and data links; fill as simulations mature.
+      </p>
+    </section>
+
+    <section id="experiments" aria-labelledby="experiments-h2">
+      <h2 id="experiments-h2">Experimental & Observational Program</h2>
+      <ul>
+        <li>Re-analyze strong/weak lensing catalogs for chromatic residuals correlated with local mass density.</li>
+        <li>Search for discretization imprints in ringdown spectra of black hole mergers.</li>
+        <li>Laboratory cavity experiments probing long-lived confined EM modes with anomalous inertia.</li>
+      </ul>
+    </section>
+
+    <section id="simulations" aria-labelledby="simulations-h2">
+      <h2 id="simulations-h2">Reference Simulation (open-source)</h2>
+      <p>
+        We publish a minimal null-network solver (TypeScript) with pluggable update rules to explore confinement and
+        lensing. Initial goals: recover SR kinematics, demonstrate mass-like resonances, and reproduce simple lensing.
+      </p>
+      <pre><code>// src/engine.ts (pseudocode → make real in repo)
+type EventID = number;
+type Complex = { re:number, im:number };
+
+interface Event { id:EventID; phase:Complex; links:EventID[]; tag?:'mass-like' }
+const E: Event[] = initLattice();
+
+function step(){
+  for (const e of E){
+    const nbr = e.links.map(id =&gt; E[id]);
+    e.phase = interfere(nbr);         // gauge-invariant combination
+    if (confinement(e) &gt;= THRESHOLD) e.tag = 'mass-like';
+  }
+}</code></pre>
+      <div class="buttons">
+        <a class="btn" id="repo-link" href="#" target="_blank" rel="noopener">📦 GitHub Repo (placeholder)</a>
+      </div>
+    </section>
+
+    <section id="related" aria-labelledby="related-h2">
+      <h2 id="related-h2">Related Work (brief notes)</h2>
+      <ul>
+        <li>Emergent spacetime & tensor networks</li>
+        <li>Holography & black hole thermodynamics</li>
+        <li>Loop- and spin-network-style discretizations</li>
+        <li>QFT excitations as field resonances; photonics analogs</li>
+      </ul>
+      <p class="muted small">We’ll convert these bullets to formal citations below.</p>
+    </section>
+
+    <section id="glossary" aria-labelledby="glossary-h2">
+      <h2 id="glossary-h2">Glossary</h2>
+      <dl>
+        <dt>Null network</dt><dd>A graph whose edges represent feasible light-like connections.</dd>
+        <dt>Confinement</dt><dd>Persistence of localized energy due to interference and gauge constraints.</dd>
+        <dt>Mass-like mode</dt><dd>A resonance with inertial response under external perturbations.</dd>
+      </dl>
+    </section>
+
+    <section id="references" aria-labelledby="references-h2">
+      <h2 id="references-h2">References</h2>
+      <ol id="refs">
+        <!-- Example stubs. Replace with real refs as we draft. -->
+        <li id="ref-ads">Maldacena, J. (1999). The Large-N limit of superconformal field theories and supergravity.</li>
+        <li id="ref-ray">Raychaudhuri, A. (1955). Relativistic cosmology. I</li>
+        <li id="ref-lqg">Rovelli, C. (2008). Loop quantum gravity.</li>
+      </ol>
+    </section>
+
+    <hr>
+    <footer class="small muted">
+      © <span id="year"></span> Thomas M. Stephens · 3dvr.tech · MIT License · This is a living document. Please open issues/PRs on GitHub.
+    </footer>
+  </main>
+
+  <script>
+    // --- Build date/time ---
+    const d = new Date();
+    document.getElementById('build-date').textContent = `Built: ${d.toLocaleString()}`;
+    document.getElementById('year').textContent = d.getFullYear();
+
+    // --- “Edit on GitHub” / Repo links (set these to your repo once created) ---
+    const GITHUB_USER = "tmsteph";               // ← change if needed
+    const REPO_NAME   = "light-based-universe";  // ← change if needed
+    const defaultBranch = "main";
+
+    const repoUrl = `https://github.com/${GITHUB_USER}/${REPO_NAME}`;
+    const editUrl = `${repoUrl}/edit/${defaultBranch}/index.html`;
+    const pagesUrl = `https://${GITHUB_USER}.github.io/${REPO_NAME}/`;
+
+    const editLink = document.getElementById('edit-link');
+    const repoLink = document.getElementById('repo-link');
+    editLink.href = editUrl;
+    repoLink.href = repoUrl;
+
+    // --- Auto Table of Contents & anchored headings ---
+    const tocList = document.getElementById('toc-list');
+    const sections = Array.from(document.querySelectorAll('main section[id]'));
+    sections.forEach(sec => {
+      const h = sec.querySelector('h2');
+      if (!h) return;
+      const li = document.createElement('li');
+      const a = document.createElement('a');
+      a.textContent = h.textContent;
+      a.href = `#${sec.id}`;
+      li.appendChild(a);
+      tocList.appendChild(li);
+    });
+
+    // --- Figure numbering ---
+    let figCount = 0;
+    document.querySelectorAll('figure').forEach(fig => {
+      figCount++;
+      const num = fig.querySelector('.fig-num');
+      if (num) num.textContent = figCount;
+    });
+
+    // --- Smooth highlight on anchor navigation for focus aid ---
+    if ('scrollRestoration' in history) history.scrollRestoration = 'auto';
+    document.querySelectorAll('a[href^="#"]').forEach(a=>{
+      a.addEventListener('click', e=>{
+        // Gentle focus after navigation for accessibility
+        setTimeout(()=>{
+          const id = a.getAttribute('href').slice(1);
+          const el = document.getElementById(id);
+          if (el){ el.style.outline='2px solid var(--acc)'; setTimeout(()=>el.style.outline='none', 1200); }
+        }, 120);
+      });
+    });
+  </script>
+</body>
+        </html>
+        
